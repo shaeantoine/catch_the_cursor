@@ -2,7 +2,6 @@ import pygame
 import random
 import math
 
-# Setup
 pygame.init()
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -12,14 +11,14 @@ clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 36)
 
 # Game state
-cursor_pos = [WIDTH // 2, HEIGHT // 2]  # Fake cursor
+cursor_pos = [WIDTH // 2, HEIGHT // 2]  
 cursor_speed = 5
 radius = 20
 score = 0
 
 running = True
 while running:
-    screen.fill((30, 30, 30))  # Clear screen
+    screen.fill((30, 30, 30))
     mx, my = pygame.mouse.get_pos()
 
     # Distance from real to fake cursor
@@ -30,10 +29,10 @@ while running:
     # If close, move fake cursor away
     if distance < 100:
         angle = math.atan2(dy, dx)
+
         cursor_pos[0] += int(cursor_speed * math.cos(angle))
         cursor_pos[1] += int(cursor_speed * math.sin(angle))
 
-        # Keep inside window
         cursor_pos[0] = max(radius, min(WIDTH - radius, cursor_pos[0]))
         cursor_pos[1] = max(radius, min(HEIGHT - radius, cursor_pos[1]))
 
