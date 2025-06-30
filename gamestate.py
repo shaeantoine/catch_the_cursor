@@ -5,7 +5,7 @@ from cursor import Cursor
 class GameState: 
     
     # Initialize the game state
-    def __init__(self, width, height):
+    def __init__(self, width, height, model=None):
         self.width = width
         self.height = height   
         self.font = pg.font.SysFont(None, 36)
@@ -31,3 +31,18 @@ class GameState:
 
         score_text = self.font.render(f"Score: {self.score}", True, (255,255,255))
         screen.blit(score_text, (10,10))
+    
+    def observe(self): 
+        px, py = pg.mouse.get_pos()
+        cx, cy = self.cursor.x, self.cursor.y
+        dx = cx - px 
+        dy = cy - py
+        distance = math.hypot(dx, dy)
+
+        return [
+            cx / self.window_width,
+            cy / self.window_height,
+            px / self.window_width,
+            py / self.window_height,
+            distance / (self.window_width + self.window_height)
+        ] 

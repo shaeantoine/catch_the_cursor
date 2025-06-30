@@ -1,6 +1,12 @@
 import pygame as pg
-from cursor import Cursor
 from gamestate import GameState
+
+model = None
+try: 
+    from stable_baselines3 import PPO 
+    model = PPO.load("trained_model.pkl") # replace with actual name 
+except: 
+    print("No RL model loaded. Using default programming")
 
 def run(): 
     pg.init() 
@@ -10,7 +16,7 @@ def run():
     clock = pg.time.Clock()
 
     # Initialize game state
-    gameState = GameState(width, height) # Game Cursor will be initialized here too
+    gameState = GameState(width, height, model=model)
     running = True
 
     while running:
@@ -32,4 +38,5 @@ def run():
 
     pg.quit()
 
-run()
+if __name__=="__main__":
+    run()
