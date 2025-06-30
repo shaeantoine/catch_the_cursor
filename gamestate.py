@@ -1,25 +1,27 @@
 import math
 import pygame as pg
 from cursor import Cursor 
+from rl_cursor import RLAgentCursor
 
 class GameState: 
     
     # Initialize the game state
     def __init__(self, width, height, model=None):
-        self.width = width
-        self.height = height   
+        self.window_width = width
+        self.window_height = height   
         self.font = pg.font.SysFont(None, 36)
         
         self.score = 0
-        self.cursor = Cursor(window_width=width, window_height=height)
+        self.cursor = RLAgentCursor(window_width=width, window_height=height, model=model)
 
     def update(self):
-        mx, my = pg.mouse.get_pos()
-        self.cursor.move_cursor(mx, my)
+        obs = self.observe()
+        self.cursor.step(obs)
 
         # Check if caught 
-        dx = self.cursor.x - mx
-        dy = self.cursor.y - my
+        px, py = obs[2] * self.window_width, obs[3] * self.window_height
+        dx = self.cursor.x - px
+        dy = self.cursor.y - py
         distance = math.hypot(dx, dy)
         if distance < self.cursor.cursor_radius:
             self.score += 1
