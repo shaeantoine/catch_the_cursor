@@ -8,13 +8,19 @@ class RLAgentCursor(Cursor):
 
     def step(self, obs):
         if self.model:
-            action, _ = self.mode.predict(obs, deterministic=True)
-            self.apply_action(action)
+            action, _ = self.model.predict(obs, deterministic=True)
+            self.apply_action(action, obs)
         else:
             self.move_cursor(obs)
     
-    def apply_action(self, action):
-        angle = action * 2 * math.pi 
-        self.x = self.cursor_speed * math.cos(angle)
-        self.x = self.cursor_speed * math.sin(angle)
+    def apply_action(self, action, obs):
+        target_x = obs[2] * self.window_width
+        target_y = obs[3] * self.window_height
+        dx = self.x - target_x
+        dy = self.y - target_y
+        base_angle = math.atan2(dy, dx)
+
+        angle = base_angle + action[0] * 0.5
+        self.x += self.cursor_speed * math.cos(angle)
+        self.y += self.cursor_speed * math.sin(angle)
         self.clamp_to_window()

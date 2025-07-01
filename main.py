@@ -4,9 +4,10 @@ from gamestate import GameState
 model = None
 try: 
     from stable_baselines3 import PPO 
-    model = PPO.load("trained_model.pkl") # replace with actual name 
+    model = PPO.load("trained_model") # replace with actual name 
+    print("RL model found. Prepare for Games")
 except: 
-    print("No RL model loaded. Using default programming")
+    print("No RL Model Found. Prepare for Default Games")
 
 def run(): 
     pg.init() 
