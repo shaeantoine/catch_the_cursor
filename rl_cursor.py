@@ -13,3 +13,8 @@ class RLAgentCursor(Cursor):
         else:
             self.move_cursor(obs)
     
+    def apply_action(self, action):
+        angle = action * 2 * math.pi 
+        self.x = self.cursor_speed * math.cos(angle)
+        self.x = self.cursor_speed * math.sin(angle)
+        self.clamp_to_window()
