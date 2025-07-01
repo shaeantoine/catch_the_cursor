@@ -5,6 +5,8 @@ This repo houses a very basic game designed at implementing and exploring a nove
 ## What is the Game? 
 You're tasked with "catching" the cursor, that is moving your mouse to a close enough proximity to the cursor . If you get close enough you'll earn a point which is tallied in the top left hand corner of the screen. 
 
+![ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/73a1410c-3ef4-454f-a0df-c2ce4ea4daf6)
+
 ## Where's the Novelty? 
 Each time the game loads, the computer engine is like a new born baby. It has no idea what it's doing. It's learning movement for the very first time and isn't following any predefined movement algorithms. It is however, outfitted with a RL feedback mechanism. This mechanism gives the model a strong negative signal each time it is "caught". 
 

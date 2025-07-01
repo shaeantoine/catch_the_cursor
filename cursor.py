@@ -17,7 +17,8 @@ class Cursor:
         return (self.x, self.y)
 
     # Defining cursor movement
-    def move_cursor(self, target_x, target_y): 
+    def move_cursor(self, obs): 
+        target_x, target_y = obs[2] * self.window_width, obs[3] * self.window_height
         dx = self.x - target_x
         dy = self.y - target_y
         distance = math.hypot(dx, dy)
