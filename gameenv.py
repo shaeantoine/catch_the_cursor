@@ -69,11 +69,11 @@ class GameEnv(gym.Env):
         return math.hypot(dx, dy)
 
     def _simulate_player_movement(self):
-        # Player moves toward cursor (basic chasing AI)
+        # Player moves toward cursor
         dx = self.cursor_x - self.player_x
         dy = self.cursor_y - self.player_y
         angle = math.atan2(dy, dx)
-        speed = 6  # player cursor speed
+        speed = 10  # player cursor speed
         self.player_x += speed * math.cos(angle)
         self.player_y += speed * math.sin(angle)
 

@@ -4,7 +4,7 @@ from gamestate import GameState
 model = None
 try: 
     from stable_baselines3 import PPO 
-    model = PPO.load("trained_model") # replace with actual name 
+    model = PPO.load("trained_model") 
     print("RL model found. Prepare for Games")
 except: 
     print("No RL Model Found. Prepare for Default Games")
